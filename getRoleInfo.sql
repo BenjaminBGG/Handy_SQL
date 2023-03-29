@@ -48,10 +48,17 @@ SELECT
 ''DB Principals'' AS [Type],
 ''?'' AS [DB],
 p.name AS [Name],
-p.default_schema_name AS [Default Schema]
+p.default_schema_name AS [Default Schema],
+CASE p.type 
+	WHEN ''U'' THEN ''USER''
+	WHEN ''S'' THEN ''SCHEMA''
+	WHEN ''R'' THEN ''ROLE''
+	WHEN ''G'' THEN ''GROUP''
+	ELSE ''''
+END AS [User Type]
 FROM sys.database_principals p
 WHERE 1=1 
-AND p.name LIKE (''sog%'') AND p.type = ''u''
+AND p.name LIKE (''%%'') AND p.type = ''u''
 --AND p.default_schema_name <> ''dbo''
 '
 EXEC sp_MSforeachdb @SQL
