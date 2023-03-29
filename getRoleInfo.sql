@@ -1,7 +1,7 @@
 --getServerRoleMembers
 
 SELECT 
-'DB Role Member' AS [Type], 
+'Server Role Member' AS [Type], 
 r.name AS [Role], 
 m.name AS [Member] 
 FROM master.sys.server_role_members rm
