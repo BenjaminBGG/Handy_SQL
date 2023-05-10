@@ -29,7 +29,7 @@ AS [End_Time]
 FROM MSDB..sysjobhistory
 
 WHERE 1=1
-AND job_id =  '5E5A9BDC-98A2-46E6-9180-80FEDB4ABB79'
+AND job_id =  ''
 --AND step_id = 2
 
 ORDER BY START_TIME DESC
