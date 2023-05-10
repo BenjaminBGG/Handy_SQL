@@ -2,7 +2,7 @@
 -- Returns list of backups on server for last @plngDaysBack
 
 
-DECLARE @plngDaysBack int = 1
+DECLARE @DaysBack int = 1
 
 SELECT 
 CONVERT(CHAR(100), SERVERPROPERTY('%%')) AS Server, 
@@ -22,7 +22,7 @@ msdb.dbo.backupset.name AS [Set Name],
 msdb.dbo.backupset.description AS [Description]
 FROM msdb.dbo.backupmediafamily 
 INNER JOIN msdb.dbo.backupset ON msdb.dbo.backupmediafamily.media_set_id = msdb.dbo.backupset.media_set_id 
-WHERE (CONVERT(datetime, msdb.dbo.backupset.backup_start_date, 102) >= GETDATE() - @plngDaysBack) 
+WHERE (CONVERT(datetime, msdb.dbo.backupset.backup_start_date, 102) >= GETDATE() - @DaysBack) 
 
 ORDER BY 
 --msdb.dbo.backupset.database_name, 
