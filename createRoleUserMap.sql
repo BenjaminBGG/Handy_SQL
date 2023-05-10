@@ -6,7 +6,7 @@ GO
 CREATE User to Database Role Mapping Table
 */
 
-DROP TABLE IF EXISTS DBA.dbo.tblRoleUserMap
+DROP TABLE IF EXISTS DBA.dbo.RoleUserMap
 
 SET ANSI_NULLS ON
 GO
@@ -14,7 +14,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [DBA].[dbo].[tblRoleUserMap](
+CREATE TABLE [DBA].[dbo].[RoleUserMap](
 	[Server] [nvarchar](128) NOT NULL DEFAULT (''),
 	[PhysicalDb] [nvarchar](128) NOT NULL DEFAULT (''),
 	[UserType] [nvarchar](128) NOT NULL DEFAULT (''),
@@ -25,19 +25,11 @@ CREATE TABLE [DBA].[dbo].[tblRoleUserMap](
 ) ON [PRIMARY]
 GO
 
--- Grant permissions for tblFI_MailMapAnnFATCRSInfo
-GRANT SELECT ON [DBA].[dbo].[tblRoleUserMap] TO [BrowseAll]; DENY UPDATE, INSERT, DELETE ON [DBA].[dbo].[tblRoleUserMap] TO [BrowseAll];
-GRANT SELECT ON [DBA].[dbo].[tblRoleUserMap] TO [Fast_Browse]; REVOKE UPDATE, INSERT, DELETE ON [DBA].[dbo].[tblRoleUserMap] TO [Fast_Browse];
-REVOKE SELECT, UPDATE, INSERT, DELETE ON [dbo].[tblRoleUserMap] TO [public];
-GRANT SELECT, UPDATE, INSERT, DELETE ON [dbo].[tblRoleUserMap] TO [UpdateAll];
-
-GO
-
 SET ANSI_PADDING ON
 
 GO
 
-ALTER TABLE [DBA].[dbo].[tblRoleUserMap] WITH NOCHECK ADD
+ALTER TABLE [DBA].[dbo].[RoleUserMap] WITH NOCHECK ADD
 CONSTRAINT [i01ROLEUSERMAP] PRIMARY KEY CLUSTERED
 (
 	[Server] ASC,
@@ -52,7 +44,7 @@ ON
 GO
 
 /*
-Create dbo.dbRoleUserMap on each DB to and run to populate DBA.dbo.tblRoleUserMap
+Create dbo.dbRoleUserMap on each DB to and run to populate DBA.dbo.RoleUserMap
 */
 
 DECLARE @SQL NVARCHAR(MAX)
